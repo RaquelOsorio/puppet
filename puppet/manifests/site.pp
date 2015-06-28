@@ -1,5 +1,5 @@
-stage{[uno,dos,tres,cuatro]:}
-stage[uno] -> stage[dos] -> stage[tres] -> stage[cuatro]
+stage{[uno,dos,tres,cuatro,cinco,seis]:}
+stage[uno] -> stage[dos] -> stage[tres] -> stage[cuatro] -> stage[cinco] -> stage[seis]
 class instalacion{
 	exec{"yum -y install bind bind-utils":
 		#ensure => present,
@@ -63,24 +63,15 @@ class{ 'instalacion' :stage => uno}
 class{ 'instalarDhcp' :stage => dos}
 class{ 'configurarResolv' :stage =>  tres}
 class{ 'hola_mundo' :stage => cuatro}
-node "puppet.linux.org" {
-#	class['hola_mundo']~>class['permisos']
+class{ 'permisos' :stage => cinco}
+class{ 'reiniciarService' :stage => seis}
+node "puppet.linux.org"{
 	include instalacion
 	include instalarDhcp
-#	include crearArchivoDB
-#	include configurarifcfg
-#	include reiniciarService
 	include configurarResolv
-##	include reiniciarDHCP
-##	include crearArchivoDB
-##	include crearArchivoDB
 	include hola_mundo
 	include permisos
-#	include reiniciarService
+	include reiniciarService
 	
 }
-#node "puppet.linux.org"{
-#	include hola_mundo
-#	include permisos
-#	include reiniciarService
-#}
+
