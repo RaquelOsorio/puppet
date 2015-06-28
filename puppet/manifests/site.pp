@@ -65,41 +65,11 @@ class{ 'configurarResolv' :stage =>  tres}
 class{ 'hola_mundo' :stage => cuatro}
 class{ 'permisos' :stage => cinco}
 class{ 'reiniciarService' :stage => seis}
-if $::osfamilly == 'RedHat' {
-	node "puppet.linux.org"{
+node "puppet.linux.org"{
 		include instalacion
 		include instalarDhcp
 		include configurarResolv
 		include hola_mundo
 		include permisos
 		include reiniciarService
-	}
-} elsif $::osfamily == 'Debian' {
-	$hostname  = 'server1'
-	node 'server' {
-		file{'/tmp/hello':
-			content => "hola mundo",
-		}
-#		exec{"aptitude install bind9":
-#			command => '/usr/bin/aptitude install bind9',
-#		}
-#		exec{'hostname server':
-#			command => '/bin/hostname server',
-#		}
-		file{'/etc/network/interfaces':
-			content => template("/etc/puppet/templates/interfaces.erb"),
-		}
-		file{'/etc/bind/named.conf.local':
-			content => template("/etc/puppet/templates/namedconflocal.erb"),
-		}
-		file{'/etc/bind/gcc.tp.db':
-			content => template("/etc/puppet/templates/misitio.erb"),
-		}
-		exec{"bind9 restart":
-			command => '/etc/init.d/bind9 restart',
-		}
-		file{'/etc/resolv.conf':
-			content => template("/etc/puppet/templates/resolv.erb"),
-		}
-	}
 }
