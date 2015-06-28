@@ -1,0 +1,15 @@
+;Fichero db.172.16.100
+$TTL 1D
+@	IN SOA	ns1.<%= @domain %>. root.<%= @domain %>. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+;Servidor
+	IN	NS	ns1.<%= @domain %>.
+
+;Hosts
+1	IN	PTR	ns1.<%= @domain %>.
+2	IN	PTR	gcc.<%= @domain %>.
+3	IN	PTR	alumno.<%= @domain %>.

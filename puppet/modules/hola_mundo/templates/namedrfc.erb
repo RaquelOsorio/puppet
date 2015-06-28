@@ -1,0 +1,10 @@
+zone "<%= @domain %>" IN {
+		type master;
+		file "db.<%= @domain %>";
+		allow-update {none; };
+};
+zone "0.0.127.in-addr.arpa" IN{
+		type master;
+		file "db.127.0.0";
+		allow-update {none; };
+};

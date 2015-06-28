@@ -1,0 +1,19 @@
+;Fichero db.gcc.tp
+$TTL 1D
+@	IN SOA	ns1.<%= @domain %>. root.<%= @domain %>. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+;Servidor
+	IN	NS	ns1.<%= @domain %>.
+
+;Hosts
+ns1	IN	A	127.0.0.1
+gcc	IN	A	127.0.0.2
+alumno	IN	A	127.0.0.3
+
+;Alias
+tp	IN	CNAME	ns1
+
