@@ -1,0 +1,18 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	gcc.tp. root.gcc.tp. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	A	<%= @ipaddress %>
+
+@	IN	NS	<%= @domain %>.
+@	IN	MX 0 	<%= @domain %>.
+
+@	IN	AAAA	::1
+server2	IN	CNAME	<%= @domain %>.
